@@ -7,6 +7,7 @@ import App from './App.vue'
 import Dashboard from './components/Dashboard.vue'
 import Issues from './components/Issues.vue'
 import Profile from './components/Profile.vue'
+import Signin from './components/Signin.vue'
 
 import '@progress/kendo-ui'
 import { KendoButtonGroup, KendoButtonsInstaller } from '@progress/kendo-buttons-vue-wrapper'
@@ -23,7 +24,7 @@ const routes = [
   { path: '/dashboard', component: Dashboard },
   { path: '/issues', component: Issues },
   { path: '/profile', component: Profile },
-  { path: '/signout', component: Issues }
+  { path: '/signout', component: Signin }
 ]
 
 const router = new Router({

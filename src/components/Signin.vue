@@ -1,0 +1,33 @@
+<template>
+
+  <div class="signin-form p-5">
+	<h1 id="app-title">ISSUES</h1>
+	<p id="app-subtitle">SAMPLE DASHBOARD</p>
+
+	<div class="form-group mt-4">
+		<input type="text" class="form-control" placeholder="Email or Username" />
+	</div>
+	<div class="form-group mb-4">
+		<input type="password" class="form-control" placeholder="Password" />
+		<p class="text-xs-right small">
+			<a href="#">Forgot it?</a>
+		</p>
+	</div>
+	<div class="form-group">
+		<button class="btn btn-primary btn-block" @click="onLoginClick">Log in</button>
+	</div>
+
+</div>
+  
+</template>
+
+<script>
+  export default {
+    name: 'signin',
+    methods: {
+      onLoginClick() {
+        this.$router.push('Dashboard')
+      }
+    }
+  }
+</script>

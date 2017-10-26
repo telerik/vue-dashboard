@@ -1,5 +1,5 @@
 <template>
-
+<div id="signin" class="signin">
   <div class="signin-form p-5">
 	<h1 id="app-title">ISSUES</h1>
 	<p id="app-subtitle">SAMPLE DASHBOARD</p>
@@ -17,8 +17,8 @@
 		<button class="btn btn-primary btn-block" @click="onLoginClick">Log in</button>
 	</div>
 
-</div>
-  
+	</div>
+ </div>
 </template>
 
 <script>

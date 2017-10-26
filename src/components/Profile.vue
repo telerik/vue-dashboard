@@ -1,5 +1,5 @@
 <template>
-
+<div>
   <div v-if="user.id">
     <div class="row mb-4">
       <div class="col-sm">
@@ -110,13 +110,14 @@
         </div>
       </div>
     </div>
-
+  </div>
+  
 	<kendo-window ref="successWindow" :width="450" :height="120" :modal="true"
 		:title="'Thank You'" :resizable="false" :visible="false">
 		<p>Your profile has been successfully updated</p>
 		<button @click="onProfileDialogClose" class="btn btn-block">OK</button>
 	</kendo-window>
-	
+
 	<kendo-window ref="deleteWindow" :width="450" :height="120" :modal="true" 
 		:title="'Are you sure you want to do this?'" :resizable="false" :visible="false">
 		<p>Account deletetion cannot be undone!</p>
@@ -125,8 +126,7 @@
 			<button @click="onDeleteDialogClose" class="btn btn-primary" style="width: 50%; float: left;">Delete Account</button>
 		</div>
 	</kendo-window>
-
-  </div>
+</div>
 </template>
 
 <script>

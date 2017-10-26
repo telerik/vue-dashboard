@@ -76,15 +76,15 @@
             <h4 class="h6">Automatically watch repositories?</h4>
             <p class="text-muted">When you are given push access to a repository, automatically receive notifications for it.</p>
             <p>
-              <input type="checkbox" />
+             <kendo-switch on-label="YES" off-label="NO"></kendo-switch>
             </p>
             <h4 class="h6">Receive updates to any conversations via email?</h4>
             <p>
-              <input type="checkbox" checked />
+             <kendo-switch on-label="YES" off-label="NO" checked="checked"></kendo-switch>
             </p>
             <h4 class="h6">Receive updates to any repositories via email?</h4>
             <p>
-              <input type="checkbox" checked />
+              <kendo-switch on-label="YES" off-label="NO" checked="checked"></kendo-switch>
             </p>
           </div>
         </div>
@@ -111,29 +111,33 @@
       </div>
     </div>
 
-    <!--   <kendo-dialog title="Thank you" *ngIf="profileDialogVisible" (close)="onProfileDialogClose()">
-        <p>Your profile has been successfully updated</p>
-        <kendo-dialog-actions>
-            <button kendoButton (click)="onProfileDialogClose()">OK</button>
-        </kendo-dialog-actions>
-    </kendo-dialog>
-
-    <kendo-dialog title="Are you sure you want to do this?" *ngIf="deleteDialogVisible" @close="onDeleteDialogClose">
-        <p>Account deletetion cannot be undone!</p>
-        <kendo-dialog-actions>
-            <button kendoButton @click="onDeleteDialogClose">Cancel</button>
-            <button kendoButton @click="onDeleteDialogClose" [primary]="true">Delete Account</button>
-        </kendo-dialog-actions>
-    </kendo-dialog>
-
-	-->
+	<kendo-window ref="successWindow" :width="450" :height="120" :modal="true" :title="'Thank You'" :resizable="false" :visible="false">
+		<p>Your profile has been successfully updated</p>
+		<button @click="onProfileDialogClose" class="btn btn-block">OK</button>
+	</kendo-window>
+	
+	<kendo-window ref="deleteWindow" :width="450" :height="120" :modal="true" :title="'Are you sure you want to do this?'" :resizable="false" :visible="false">
+		<p>Account deletetion cannot be undone!</p>
+		<div>
+			<button @click="onDeleteDialogClose" class="btn btn-secondary" style="width: 50%; float: left;">Cancel</button>
+			<button @click="onDeleteDialogClose" class="btn btn-primary" style="width: 50%; float: left;">Delete Account</button>
+		</div>
+	</kendo-window>
 
   </div>
 </template>
 
 <script>
+import { KendoWindow, KendoWindowInstaller } from '@progress/kendo-window-vue-wrapper'
+import { KendoSwitch, KendoInputsInstaller } from '@progress/kendo-inputs-vue-wrapper'
+
+  /* global kendo */
   export default {
     name: 'profile',
+	components : {
+		KendoWindow,
+		KendoSwitch
+	},
     created() {
       var that = this
       that.ghData = new kendo.data.DataSource({
@@ -152,13 +156,7 @@
           },
           model: {
             fields: {
-              id: { type: "number" },
-              login: { type: "string" },
-              name: { type: "string" },
-              avatar_url: { type: "string" },
-              email: { type: "string" },
-              company: { type: "string" },
-              location: { type: "string" }
+              id: { type: "number" }
             }
           }
         },
@@ -175,16 +173,24 @@
     },
     methods: {
       onSignOutClick() {
-        alert("onSignOutClick")
+        this.$router.push('Signin')
       },
       onUpdateClick() {
-        alert("onUpdateClick")
+		var kWindow = this.$refs.successWindow.kendoWidget();
+        kWindow.center().open();
       },
+	  onProfileDialogClose(){
+	  var kWindow = this.$refs.successWindow.kendoWidget();
+        kWindow.close();
+	  },
       onDeleteDialogClose() {
-        alert("onDeleteDialogClose")
+         var kWindow = this.$refs.deleteWindow.kendoWidget();
+        kWindow.close();
       },
       onDeleteClick() {
-        alert("onDeleteClick")
+	  var kWindow = this.$refs.deleteWindow.kendoWidget();
+        kWindow.center().open();
+        
       }
     }
   }

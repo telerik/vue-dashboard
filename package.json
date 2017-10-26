@@ -29,6 +29,8 @@
     "@progress/kendo-grid-vue-wrapper": "2017.3.1018",
     "@progress/kendo-datasource-vue-wrapper": "2017.3.1018",
     "@progress/kendo-buttons-vue-wrapper": "2017.3.1018",
+	"@progress/kendo-window-vue-wrapper": "2017.3.1018",
+	"@progress/kendo-inputs-vue-wrapper": "2017.3.1018",
     "@progress/kendo-theme-bootstrap": "^2.8.0",
     "@progress/kendo-theme-default": "^2.40.2",
     "marked": "^0.3.6"

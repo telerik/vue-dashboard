@@ -2,108 +2,116 @@
 
   <div v-if="user.id">
     <div class="row mb-4">
-        <div class="col-sm">
-            <h2>
-                <span class="small text-uppercase text-muted d-block">Account</span>
-                {{user.login}} - {{user.name}}
-            </h2>
-        </div>
-        <div class="col-sm text-sm-right">
-            <button class="btn btn-secondary" @click="onSignOutClick">Sign out</button>
-        </div>
+      <div class="col-sm">
+        <h2>
+          <span class="small text-uppercase text-muted d-block">Account</span>
+          {{user.login}} - {{user.name}}
+        </h2>
+      </div>
+      <div class="col-sm text-sm-right">
+        <button class="btn btn-secondary" @click="onSignOutClick">Sign out</button>
+      </div>
     </div>
 
     <div class="row">
-        <div class="col-md-7">
+      <div class="col-md-7">
 
-            <div class="card" id="profile">
-                <h3 class="card-header">Public Profile</h3>
-                <div class="card-block">
+        <div class="card" id="profile">
+          <h3 class="card-header">Public Profile</h3>
+          <div class="card-block">
 
-                    <div class="row">
-                        <div class="col-md-3 text-xs-center">
-                            <img :src="user.avatar_url" style="max-width: 100%" class="img-circle mx-auto" />
-                        </div>
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label class="h6">Username</label>
-                                <input type="text" id="username" class="form-control" :value="user.login" />
-                            </div>
-                            <div class="form-group">
-                                <label class="h6">Name</label>
-                                <input type="text" id="name" class="form-control" :value="user.name" />
-                            </div>
-                            <div class="form-group">
-                                <label class="h6">Email</label>
-                                <input type="email" id="email" class="form-control" :value="user.email" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-check-label h6">
-                                    <input type="checkbox" class="form-check-input" checked /> Keep my email address private
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label class="h6">Company</label>
-                                <input type="text" id="company" class="form-control" :value="user.company" />
-                            </div>
-                            <div class="form-group">
-                                <label class="h6">Location</label>
-                                <input type="text" id="location" class="form-control" :value="user.location" />
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary" @click="onUpdateClick">Update profile</button>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row">
+              <div class="col-md-3 text-xs-center">
+                <img :src="user.avatar_url" style="max-width: 100%" class="img-circle mx-auto" />
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <label class="h6">Username</label>
+                  <input type="text" id="username" class="form-control" :value="user.login" />
                 </div>
-            </div>
-
-            <div class="card" id="delete-account">
-                <h3 class="card-header">Delete Account</h3>
-                <div class="card-block">
-                    <p>You will immediately lose access to your repositories and all other information associated with your account. <strong>This cannot be undone!</strong></p>
-                    <button class="btn btn-danger" @click="onDeleteClick">Delete Account</button>
+                <div class="form-group">
+                  <label class="h6">Name</label>
+                  <input type="text" id="name" class="form-control" :value="user.name" />
                 </div>
+                <div class="form-group">
+                  <label class="h6">Email</label>
+                  <input type="email" id="email" class="form-control" :value="user.email" />
+                </div>
+                <div class="form-group">
+                  <label class="form-check-label h6">
+                    <input type="checkbox" class="form-check-input" checked /> Keep my email address private
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label class="h6">Company</label>
+                  <input type="text" id="company" class="form-control" :value="user.company" />
+                </div>
+                <div class="form-group">
+                  <label class="h6">Location</label>
+                  <input type="text" id="location" class="form-control" :value="user.location" />
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary" @click="onUpdateClick">Update profile</button>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="col-md-5">
 
-            <div class="card" id="notifications">
-                <h3 class="card-header">Notifications</h3>
-                <div class="card-block">
-                    <h4 class="h6">Automatically watch repositories?</h4>
-                    <p class="text-muted">When you are given push access to a repository, automatically receive notifications for it.</p>
-                    <p><input type="checkbox" /></p>
-                    <h4 class="h6">Receive updates to any conversations via email?</h4>
-                    <p> <input type="checkbox" checked /></p>
-                    <h4 class="h6">Receive updates to any repositories via email?</h4>
-                    <p> <input type="checkbox" checked /></p>
-                </div>
-            </div>
-            <div class="card" id="password">
-                <h3 class="card-header">Update password</h3>
-                <div class="card-block">
-                    <div class="form-group">
-                        <label class="h6">Old password</label>
-                        <input type="password" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label class="h6">New password</label>
-                        <input type="password" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label class="h6">Confirm password</label>
-                        <input type="password" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                       <button class="btn btn-secondary">Change password</button>
-                    </div>
-                </div>
-            </div>
+        <div class="card" id="delete-account">
+          <h3 class="card-header">Delete Account</h3>
+          <div class="card-block">
+            <p>You will immediately lose access to your repositories and all other information associated with your account.
+              <strong>This cannot be undone!</strong>
+            </p>
+            <button class="btn btn-danger" @click="onDeleteClick">Delete Account</button>
+          </div>
         </div>
+      </div>
+      <div class="col-md-5">
+
+        <div class="card" id="notifications">
+          <h3 class="card-header">Notifications</h3>
+          <div class="card-block">
+            <h4 class="h6">Automatically watch repositories?</h4>
+            <p class="text-muted">When you are given push access to a repository, automatically receive notifications for it.</p>
+            <p>
+              <input type="checkbox" />
+            </p>
+            <h4 class="h6">Receive updates to any conversations via email?</h4>
+            <p>
+              <input type="checkbox" checked />
+            </p>
+            <h4 class="h6">Receive updates to any repositories via email?</h4>
+            <p>
+              <input type="checkbox" checked />
+            </p>
+          </div>
+        </div>
+        <div class="card" id="password">
+          <h3 class="card-header">Update password</h3>
+          <div class="card-block">
+            <div class="form-group">
+              <label class="h6">Old password</label>
+              <input type="password" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="h6">New password</label>
+              <input type="password" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="h6">Confirm password</label>
+              <input type="password" class="form-control" />
+            </div>
+            <div class="form-group">
+              <button class="btn btn-secondary">Change password</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
- <!--   <kendo-dialog title="Thank you" *ngIf="profileDialogVisible" (close)="onProfileDialogClose()">
+    <!--   <kendo-dialog title="Thank you" *ngIf="profileDialogVisible" (close)="onProfileDialogClose()">
         <p>Your profile has been successfully updated</p>
         <kendo-dialog-actions>
             <button kendoButton (click)="onProfileDialogClose()">OK</button>
@@ -117,86 +125,67 @@
             <button kendoButton @click="onDeleteDialogClose" [primary]="true">Delete Account</button>
         </kendo-dialog-actions>
     </kendo-dialog>
-	
+
 	-->
 
-</div>
+  </div>
 </template>
 
 <script>
   export default {
     name: 'profile',
-    mounted(){
-     // this.ghData = this.$refs["ghDataSourceComponent"].ghData
-     // this.$refs["issuesGrid"].kendoWidget().setDataSource(this.ghData)
-    },
     created() {
-     this.ghData = new kendo.data.DataSource({
-	 pageSize: 1,
-       transport: {
-         read: {
-           url: 'https://api.github.com/users/ggkrustev',
-		   dataType: "json",
-		 //  data: {state: 'all', page: 1, per_page: 1},
-           beforesend: function (req) {
-             req.setrequestheader('authorization', 'token b95116792cba5a8169a1ec10640d8c16535c6419')
-           }
-         }
-       },
+      var that = this
+      that.ghData = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: 'https://api.github.com/users/ggkrustev',
+            dataType: "json",
+            beforeSend: function (req) {
+              req.setRequestHeader('Authorization', 'token b95116792cba5a8169a1ec10640d8c16535c6419')
+            }
+          }
+        },
         schema: {
-		data: function(response){
-			return response
-		},
+          data: function (response) {
+            return response
+          },
           model: {
             fields: {
               id: { type: "number" },
-			  login: { type: "string" },
-			  name: { type: "string" },
-			  avatar_url: { type: "string" },
-			  email: { type: "string" },
-			  company: { type: "string" },
-			  location: { type: "string" }
+              login: { type: "string" },
+              name: { type: "string" },
+              avatar_url: { type: "string" },
+              email: { type: "string" },
+              company: { type: "string" },
+              location: { type: "string" }
             }
           }
+        },
+        requestEnd: (data) => {
+          that.user = data.response
         }
-     })
-	 this.ghData.read()
-	//this.ghData.fetch()
-//this.ghData.view()
-//	 debugger
-	 console.log( this.ghData.view())
-	 //console.log( this.ghData.data())
+      })
+      this.ghData.read()
     },
-	data(){
-	 return {
-        user : {
-			id: "id",
-			login: "login",
-			name: "name",
-			avatar_url: "iiiiiiiiiiiiiiiiiiiiiii",
-			email : "email",
-			company : "company",
-			location : "location"
-			}
-		
-		
-		
-		
+    data() {
+      return {
+        user: {}
       }
-	},
-	methods: {
-		onSignOutClick () {
-			alert("onSignOutClick")
-		},
-		onUpdateClick () {
-			alert("onUpdateClick")
-		},
-		onDeleteDialogClose () {
-			alert("onDeleteDialogClose")
-		},
-		onDeleteClick () {
-			alert("onDeleteClick")
-		}
-	}
+    },
+    methods: {
+      onSignOutClick() {
+        alert("onSignOutClick")
+      },
+      onUpdateClick() {
+        alert("onUpdateClick")
+      },
+      onDeleteDialogClose() {
+        alert("onDeleteDialogClose")
+      },
+      onDeleteClick() {
+        alert("onDeleteClick")
+      }
+    }
   }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dashboard">
     <div class="row mb-4">
       <div class="col-sm">
         <h2>
@@ -15,111 +15,100 @@
         </kendo-buttongroup>
       </div>
     </div>
-    <div class="row">
-      <kendo-grid :data-source="issues.active">
+    <div class="row" v-if="issues">
+      <!-- <kendo-grid :data-source="issues.active">
 
-            </kendo-grid>
-      <div class="col-md-12">
+            </kendo-grid> -->
+      <div class="col-md-12" >
         <div class="card">
           <h3 class="card-header">Active Issues</h3>
           <div class="card-block">
 
-            <div class="row">
+            <div class="row" >
 
               <div class="col-sm-12 col-md-6 col-lg active-issues">
                 <span class="comp-label">
-                  <!-- <strong>{{ issues.open + issues.closed }}</strong> -->
+                  <strong>{{ issues.open + issues.closed }}</strong>
                   <small>Active issues</small>
                 </span>
-                <!-- <kendo-chart style="height: 80px;">
-                                <kendo-chart-series-defaults type="column" [stack]="true" [gap]="0.5" [overlay]="false"></kendo-chart-series-defaults>
-                                <kendo-chart-series>
-                                    <kendo-chart-series-item [color]="'#888'" [data]="active" field="count" categoryField="date" aggregate="count"></kendo-chart-series-item>
-                                </kendo-chart-series>
-                                <kendo-chart-category-axis>
-                                    <kendo-chart-category-axis-item
-                                        [baseUnit]="baseUnit"
-                                        [majorTicks]="{visible: false}"
-                                        [labels]="{step: 4, skip: 2, font: '10px sans-serif'}"
-                                        [majorGridLines]="{visible: false}"
-                                        [line]="{visible: false}"
-                                    ></kendo-chart-category-axis-item>
-                                </kendo-chart-category-axis>
-                                <kendo-chart-value-axis>
-                                    <kendo-chart-value-axis-item [visible]="false" [majorGridLines]="{visible: false}">
-                                    </kendo-chart-value-axis-item>
-                                </kendo-chart-value-axis>
-                            </kendo-chart> -->
+                <kendo-chart :chart-area="activeIssuesOptions.chartArea"
+                      :series="activeIssuesOptions.series"
+                      :series-defaults="{color: 'rgb(136, 136, 136)'}"
+                      :category-axis="activeIssuesOptions.categoryAxis"
+                      :value-axis="activeIssuesOptions.valueAxis"
+                      :data-source="issues.active">
+                </kendo-chart>
               </div>
 
               <div class="col-sm-12 col-md-6 col-lg text-success closed-issues">
                 <span class="comp-label">
-                  <!-- <strong>{{ issues.closed }}</strong> -->
+                  <strong>{{ issues.closed }}</strong>
                   <small>Closed issues</small>
                 </span>
-                <!-- <kendo-chart style="height: 80px;">
-                                <kendo-chart-series-defaults type="column" [stack]="true" [gap]="0.5" [overlay]="false"></kendo-chart-series-defaults>
-                                <kendo-chart-series>
-                                    <kendo-chart-series-item [color]="'#35C473'" [data]="data.closed" field="count" categoryField="date" aggregate="count"></kendo-chart-series-item>
-                                </kendo-chart-series>
-                                <kendo-chart-category-axis>
-                                    <kendo-chart-category-axis-item
-                                        [baseUnit]="baseUnit"
-                                        [majorTicks]="{visible: false}"
-                                        [labels]="{step: 4, skip: 2, font: '10px sans-serif'}"
-                                        [majorGridLines]="{visible: false}"
-                                        [line]="{visible: false}"
-                                    ></kendo-chart-category-axis-item>
-                                </kendo-chart-category-axis>
-                                <kendo-chart-value-axis>
-                                    <kendo-chart-value-axis-item [visible]="false" [majorGridLines]="{visible: false}">
-                                    </kendo-chart-value-axis-item>
-                                </kendo-chart-value-axis>
-                            </kendo-chart> -->
+                <kendo-chart :chart-area="activeIssuesOptions.chartArea"
+                  :series="activeIssuesOptions.series"
+                  :series-defaults="{color: '#27c46d'}"
+                  :category-axis="activeIssuesOptions.categoryAxis"
+                  :value-axis="activeIssuesOptions.valueAxis"
+                  :data-source="issues.groupedIssues.closed">
+               </kendo-chart>
               </div>
 
               <div class="col-sm-12 col-md-6 col-lg text-danger open-issues">
                 <span class="comp-label">
-                  <!-- <strong>{{ issues.open }}</strong> -->
+                  <strong>{{ issues.open }}</strong>
                   <small>Open issues</small>
                 </span>
-                <!-- <kendo-chart style="height: 80px;">
-                                <kendo-chart-series-defaults type="column" [stack]="true" [gap]="0.5" [overlay]="false"></kendo-chart-series-defaults>
-                                <kendo-chart-series>
-                                    <kendo-chart-series-item [color]="'#CC3458'" [data]="data.open" field="count" categoryField="date" aggregate="count"></kendo-chart-series-item>
-                                </kendo-chart-series>
-                                <kendo-chart-category-axis>
-                                    <kendo-chart-category-axis-item
-                                        [baseUnit]="baseUnit"
-                                        [majorTicks]="{visible: false}"
-                                        [labels]="{step: 4, skip: 2, font: '10px sans-serif'}"
-                                        [majorGridLines]="{visible: false}"
-                                        [line]="{visible: false}"
-                                    ></kendo-chart-category-axis-item>
-                                </kendo-chart-category-axis>
-                                <kendo-chart-value-axis>
-                                    <kendo-chart-value-axis-item [visible]="false" [majorGridLines]="{visible: false}">
-                                    </kendo-chart-value-axis-item>
-                                </kendo-chart-value-axis>
-                            </kendo-chart> -->
+                <kendo-chart :chart-area="activeIssuesOptions.chartArea"
+                  :series="activeIssuesOptions.series"
+                  :series-defaults="{color: '#CF3268'}"
+                  :category-axis="activeIssuesOptions.categoryAxis"
+                  :value-axis="activeIssuesOptions.valueAxis"
+                  :data-source="issues.groupedIssues.open">
+               </kendo-chart>
               </div>
 
               <div class="col-sm-12 col-md-6 col-lg close-rate">
                 <span class="comp-label">
-                  <!-- <strong>{{ issues.closeRate.average | percent:'2.0-0' }}</strong> -->
+                  <strong >{{ Math.round(issues.closeRate.average * 100, 2) }}%</strong>
                   <small>Close rate</small>
                 </span>
-                <!-- <p class="m-0 small text-uppercase text-muted">
+                <p class="m-0 small text-uppercase text-muted">
                                 Highest:
-                                {{issues.closeRate.highest.close_rate | percent: '2.0-0' }}
-                                on {{issues.closeRate.highest.created_at | date}}
+                              {{Math.round(issues.closeRate.highest.close_rate * 100, 2) }}%
+                                on {{new Date(parseInt(issues.closeRate.highest.created_at)).toDateString()}}
                             </p>
                             <p class="m-0 small text-uppercase text-muted">
                                 Lowest:
-                                {{issues.closeRate.lowest.close_rate | percent: '2.0-0' }}
-                                on {{issues.closeRate.lowest.created_at | date}}
+                                {{Math.round(issues.closeRate.lowest.close_rate* 100, 2) }}%
+                                on {{ new Date(parseInt(issues.closeRate.lowest.created_at)).toDateString() }}
                             </p>
-                            <kendo-chart style="height: 20px;" [chartArea]="{margin: -20}">
+                            <kendo-chart
+                              :legend-visible="false"
+                              :data-source="[{target: 70, current: Math.round(issues.closeRate.average* 100)}]"
+                              :series="[{
+                                type: 'bullet',
+                                target: {color: '#fff'},
+                                currentField: 'current',
+                                targetField: 'target'
+                              }]"
+                              :value-axis-min="0"
+                              :value-axis-max="100"
+                              :chart-area-margin-left="0"
+                              :chart-area-margin-top="-20"
+                              :value-axis-major-ticks-visible="false"
+                              :value-axis-minor-ticks-visible="false"
+                              :value-axis-major-grid-lines-visible="false"
+                              :value-axis-labels-visible="false"
+                              :value-axis-line-visible="false"
+                              :value-axis-plot-bands="[{from:0, to:100, color: '#35C473'}]"
+                              :category-axis-line-visible="false"
+                              :category-axis-major-grid-lines-visible="false"
+                              :category-axis-major-ticks-visible="false"
+                              :chart-area-height="50"
+                              :tooltip-visible="false"
+                            ></kendo-chart>
+                            <!-- <kendo-chart style="height: 20px;" [chartArea]="{margin: -20}">
                                 <kendo-chart-series>
                                     <kendo-chart-series-item type="bullet"
                                         [data]="bulletData"
@@ -246,7 +235,6 @@
     created() {
       var that = this
       that.ghData = new kendo.data.DataSource({
-        pageSize: 3,
         transport: {
           read: {
             url: 'https://api.github.com/repos/telerik/kendo-ui-core/issues',
@@ -265,12 +253,49 @@
         }
       })
 
+
+      that.activeIssuesOptions = {
+           chartArea: {
+            height: 80
+           },
+           series: [{
+                type: "column",
+                gap: 0.5,
+                overlay: false,
+                stack:true,
+                field: "count",
+                categoryField: "date",
+                aggregate :"count"
+            }],
+            categoryAxis: [{
+                type:"date",
+                baseUnit: "days",
+                labels:{
+                    step: 4,
+                    font: '10px sans-serif',
+                    format: "ddd MM"
+                },
+                majorGridLines: {
+                    visible: false
+                },
+                line: {
+                    visible: false
+                },
+            }],
+            valueAxis: {
+                visible: false,
+                majorGridLines: {
+                    visible: false
+                },
+            }
+        }
+
       that.ghData.read()
     },
     data() {
       return {
         today: new Date(),
-        selectedIndex: 0,
+        selectedIndex: 2,
         response: []
       }
     },
@@ -281,7 +306,7 @@
     },
     computed: {
       issues () {
-          return this.response.length > 0 ? ghIssuesProcessor.process(this.response, this.days) : {}
+          return this.response.length > 0 ? ghIssuesProcessor.process(this.response, this.days) : null
       },
       days() {
         switch (this.selectedIndex) {

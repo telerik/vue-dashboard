@@ -24,7 +24,7 @@ const routes = [
   { path: '/dashboard', component: Dashboard },
   { path: '/issues', component: Issues },
   { path: '/profile', component: Profile },
-  { path: '/signout', component: Signin }
+  { path: '/signin', component: Signin }
 ]
 
 const router = new Router({

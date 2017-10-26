@@ -12,15 +12,6 @@
               :pageable-button-count="5" :detail-template="detailTemplate">
               <kendo-grid-column field="number" title="ID" :width="100" :filterable="false" template="<a href='#: html_url #'>\##: number #</a>">
               </kendo-grid-column>
-              <kendo-grid-column field="title" title="Title" :filterable="true" template="
-                <span class='issue-status
-                  #if (state === 'open') {#
-                    issue-open
-                    # } else { #
-                      issue-closed
-                    # } #'></span>
-                  #:title#">
-              </kendo-grid-column>
               <kendo-grid-column field="labels" title="Labels" :width="200" :filterable="false" template="
                 #for (var i = 0; i < labels.length; i++) {#
                   <span class='badge' style='background-color: #: getColor(labels[i].name) #'>#: labels[i].name #</span>
@@ -36,9 +27,9 @@
           </div>
           <div class="col-sm text-sm-right">
               <kendo-buttongroup @select="onSelect" :index="selectedIndex">
-                  <kendo-buttongroup-button>3 Months</kendo-buttongroup-button>
-                  <kendo-buttongroup-button>6 Months</kendo-buttongroup-button>
-                  <kendo-buttongroup-button>1 Year</kendo-buttongroup-button>
+                  <kendo-buttongroup-button>1 Week</kendo-buttongroup-button>
+                  <kendo-buttongroup-button>2 Weeks</kendo-buttongroup-button>
+                  <kendo-buttongroup-button>1 Month</kendo-buttongroup-button>
               </kendo-buttongroup>
           </div>
       </div>
@@ -51,6 +42,7 @@
     name: 'dashboard',
     created(){
        this.ghData = new kendo.data.DataSource({
+         pageSize: 3,
         transport: {
           read: {
             url: 'https://api.github.com/repos/telerik/kendo-ui-core/issues',
@@ -80,21 +72,21 @@
       }
     },
     computed: {
-      months () {
+      days () {
         switch (this.selectedIndex) {
           case 0:
-            return 3
+            return 7
           case 1:
-            return 6
+            return 14
           case 2:
-            return 12
+            return 30
           default:
             return 3
         }
       },
       rangeStart () {
-        var since = new Date()
-        since.setMonth(since.getMonth() - this.months)
+        const since = new Date()
+        since.setDate(since.getDate() - this.days)
 
         return since
       },
@@ -108,10 +100,7 @@
     methods: {
       onSelect (ev) {
         this.selectedIndex = ev.index
-        var today = new Date();
-        var fd = new Date();
-          fd.setDate(today.getDate() - 7);
-        this.ghData.filter({ field: "created_at", operator: "gt", value: fd })
+        this.ghData.filter({ field: "created_at", operator: "gt", value: this.rangeStart })
       }
     }
   }

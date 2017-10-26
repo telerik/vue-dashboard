@@ -1,11 +1,11 @@
 <template>
   <div class="issues">
-    <issues-data-source ref="ghDataSourceComponent"
+    <issues-data-source v-model="ghData" ref="ghDataSourceComponent"
       url="https://api.github.com/repos/telerik/kendo-ui-core/issues"
-      pagingSettings="{state: 'all', page: 1, per_page: 100}"
-      pageSize="10">
+      :pagingSettings="{state: 'all', page: 1, per_page: 100}"
+      :pageSize="10">
     </issues-data-source>
-    <kendo-grid ref="issuesGrid" :sortable="true" :filterable="true" :pageable-refresh="true" :pageable-page-sizes="true"
+    <kendo-grid ref="issuesGrid" :data-source="ghData" :sortable="true" :filterable="true" :pageable-refresh="true" :pageable-page-sizes="true"
       :pageable-button-count="5" :detail-template="detailTemplate">
       <kendo-grid-column field="number" title="ID" :width="100" :filterable="false" template="<a href='#: html_url #'>\##: number #</a>">
       </kendo-grid-column>
@@ -102,36 +102,16 @@
             </div>
         </div>`
 
-  /* global kendo */
   export default {
     name: 'issues',
     components: {IssuesDataSource},
-    mounted(){
-      this.ghData = this.$refs["ghDataSourceComponent"].ghData
-      this.$refs["issuesGrid"].kendoWidget().setDataSource(this.ghData)
+    data () {
+      return {
+        ghData: {}
+      }
     },
     created() {
       this.detailTemplate = DETAIL_TEMPLATE;
-
-      //use :data-source="ghData" on the grid component if you use this approach
-      //which does not allow code reuse for the data source component
-      //with this, the mounted() code and the issues data source components are not needed
-      // this.ghData = new kendo.data.DataSource({
-      //   pageSize: 10,
-      //   transport: {
-      //     read: {
-      //       url: 'https://api.github.com/repos/telerik/kendo-ui-core/issues',
-      //       data: {
-      //         state: 'all',
-      //         page: 1,
-      //         per_page: 100
-      //       },
-      //       beforeSend: function (req) {
-      //         req.setRequestHeader('Authorization', 'token b95116792cba5a8169a1ec10640d8c16535c6419')
-      //       }
-      //     }
-      //   }
-      // })
     }
   }
 

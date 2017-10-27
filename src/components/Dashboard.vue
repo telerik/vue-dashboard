@@ -84,7 +84,7 @@
                             <kendo-chart v-if="issues.closeRate.highest.close_rate"
                               :legend-visible="false"
                               :chart-area-height="30"
-                              :data-source="[{target: 70, current: Math.round(issues.closeRate.average* 100)}]"
+                              :data-source="[{target: 70, current: Math.round(issues.closeRate.average * 100)}]"
                               :series="[{
                                 type: 'bullet',
                                 gap: 0,
@@ -107,26 +107,7 @@
                               :category-axis-major-ticks-visible="false"
                               :tooltip-visible="false"
                             ></kendo-chart>
-                            <!-- <kendo-chart style="height: 20px;" [chartArea]="{margin: -20}">
-                                <kendo-chart-series>
-                                    <kendo-chart-series-item type="bullet"
-                                        [data]="bulletData"
-                                        [target]="{color: '#FFF'}"
-                                        currentField="current"
-                                        targetField="target"
-                                        color="#CC3458"
-                                    ></kendo-chart-series-item>
-                                </kendo-chart-series>
-                                <kendo-chart-value-axis>
-                                    <kendo-chart-value-axis-item
-                                        [plotBands]="[{from:0, to:100, color: '#35C473'}]"
-                                        [visible]="false"
-                                        [majorGridLines]="{visible: false}">
-                                    </kendo-chart-value-axis-item>
-                                </kendo-chart-value-axis>
-                            </kendo-chart> -->
               </div>
-
             </div>
 
 
@@ -164,7 +145,7 @@
                   opacity: 0.3
                 }]"
               :category-axis-type="'date'"
-              :category-axis-base-unit="'days'"
+              :category-axis-base-unit="baseUnit"
               :category-axis-major-ticks-visible="false"
               :category-axis-major-grid-lines-visible="false"
               :category-axis-line-visible="false"
@@ -200,8 +181,6 @@
             </kendo-chart>
             <div class="comp-label chart-label">
               <div class="comp-label chart-label">
-                <!-- <strong>{{donutPercent}}</strong>
-                <small>{{donutLabel}}</small> -->
               </div>
             </div>
           </div>
@@ -210,14 +189,6 @@
       <div class="col-md-8">
         <div class="card">
           <h4 class="card-header">Types Distribution</h4>
-          <div class="row card-block small">
-            <!-- <a *ngFor="let button of seriesColors" (click)="addSeries(button, true)"
-                          [style.color]="button.active ? button.value : initialGrey"
-                          class="col-xs-4 col-sm-3 col-md comp-label">
-                          <strong>{{data[button.label].length}}</strong>
-                          <small>{{button.label}}</small>
-                      </a> -->
-          </div>
           <div class="card-block">
             <kendo-chart :chart-area-height="360"
                 :series-defaults-type="'line'"
@@ -282,7 +253,7 @@
                 }]"
                 :legend="{position: 'top', labels:{template: legendTemplate, font: '16px sans-serif', margin:{right: 40}}}"
                 :category-axis-type="'date'"
-                :category-axis-base-unit="'weeks'"
+                :category-axis-base-unit="baseUnit"
                 :category-axis-major-ticks-visible="false"
                 :category-axis-major-grid-lines-visible="false"
                 :category-axis-line-visible="false"
@@ -367,41 +338,13 @@
             }
         }
 
-        that.allIssuesSeries = [{
-              name: 'closed',
-              color: 'green',
-              field: 'count',
-              aggregate: 'count',
-              categoryField: 'dateClosed',
-           //   data: issues.groupedIssues.closed
-           data: [{'closed': 1, 'date': new Date()},{'closed': 1, 'date': new Date()}]
-
-            },
-            {
-              name: 'open',
-              color: 'red',
-              field: 'count',
-              aggregate: 'count',
-              categoryField: 'created_at',
-             //field: issues.groupedIssues.open,
-              data: [{'open': 1, 'date': new Date()},{'open': 1, 'date': new Date()}]
-            }
-            ]
-
       that.ghData.read()
     },
     data() {
       return {
         today: new Date(),
         selectedIndex: 2,
-        response: [],
-        donutPercent: '',
-        donutLabel: ''
-      }
-    },
-    watch:{
-      issues (val) {
-        console.log(val)
+        response: []
       }
     },
     computed: {
@@ -425,6 +368,9 @@
         since.setDate(since.getDate() - this.days)
 
         return since
+      },
+      baseUnit () {
+        return this.selectedIndex > 1 ? 'weeks' : 'days'
       }
     },
     methods: {
@@ -433,14 +379,13 @@
       },
       legendTemplate (data) {
         var series = data.series
-        var name = series.name
         var value = 0
 
         for (var i = 0; i < series.data.length; i++) {
           value += series.data[i].value
         }
 
-        return value + "\n" + name
+        return value + "\n" + series.name
       },
       calculatePercent (data) {
         return Math.round(data * 100)

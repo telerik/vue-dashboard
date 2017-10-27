@@ -39,32 +39,32 @@ export class IssuesModel {
          }
 }
 
-export class Label {
-    name;
-    color;
-}
+// export class Label {
+//     name;
+//     color;
+// }
 
-export class User {
-    id;
-    name;
-    avatarUrl;
-    avatarUrlThumb;
-}
-export class Milestone {
-    title;
-}
-export class Issue {
-    id;
-    title;
-    body;
-    author;
-    assignees;
-    milestone;
-    state;
-    date;
-    dateClosed;
-    count;
-    created_at;
-    labels;
-    assignee;
-}
+// export class User {
+//     id;
+//     name;
+//     avatarUrl;
+//     avatarUrlThumb;
+// }
+// export class Milestone {
+//     title;
+// }
+// export class Issue {
+//     id;
+//     title;
+//     body;
+//     author;
+//     assignees;
+//     milestone;
+//     state;
+//     date;
+//     dateClosed;
+//     count;
+//     created_at;
+//     labels;
+//     assignee;
+// }

@@ -111,14 +111,14 @@
       </div>
     </div>
   </div>
-  
+
 	<kendo-window ref="successWindow" :width="450" :height="120" :modal="true"
 		:title="'Thank You'" :resizable="false" :visible="false">
 		<p>Your profile has been successfully updated</p>
 		<button @click="onProfileDialogClose" class="btn btn-block">OK</button>
 	</kendo-window>
 
-	<kendo-window ref="deleteWindow" :width="450" :height="120" :modal="true" 
+	<kendo-window ref="deleteWindow" :width="450" :height="120" :modal="true"
 		:title="'Are you sure you want to do this?'" :resizable="false" :visible="false">
 		<p>Account deletetion cannot be undone!</p>
 		<div>
@@ -140,7 +140,7 @@ import { KendoSwitch, KendoInputsInstaller } from '@progress/kendo-inputs-vue-wr
 		KendoWindow,
 		KendoSwitch
 	},
-    created() {
+    created () {
       var that = this
       that.ghData = new kendo.data.DataSource({
         transport: {
@@ -168,13 +168,13 @@ import { KendoSwitch, KendoInputsInstaller } from '@progress/kendo-inputs-vue-wr
       })
       that.ghData.read()
     },
-	mounted() {
+	mounted () {
 		this.successWindowWidget = this.$refs.successWindow.kendoWidget()
 		this.deleteWindowWidget = this.$refs.deleteWindow.kendoWidget()
 	},
-    data() {
+    data () {
       return {
-        user: {}		
+        user: {}
       }
     },
     methods: {
@@ -191,7 +191,7 @@ import { KendoSwitch, KendoInputsInstaller } from '@progress/kendo-inputs-vue-wr
         this.deleteWindowWidget.close()
       },
       onDeleteClick() {
-        this.deleteWindowWidget.center().open()        
+        this.deleteWindowWidget.center().open()
       }
     }
   }

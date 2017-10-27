@@ -132,6 +132,54 @@
 
 
             <h3>All issues</h3>
+            <kendo-chart
+              :chart-area-height="400"
+              :series-defaults-type="'column'"
+              :series-defaults-stack="true"
+              :series-defaults-gap="0.6"
+              :series-defaults-overlay="false"
+              :series="[{
+                  name: 'open',
+                  color: '#35C473',
+                  field: 'count',
+                  aggregate: 'count',
+                  categoryField: 'date',
+                  data: issues.groupedIssues.open,
+                  border: {
+                    color: '#35C473',
+                    opacity: 0.3
+                  },
+                  opacity: 0.3
+                },
+                {
+                  name: 'closed',
+                  color: '#CC3458',
+                  field: 'count',
+                  aggregate: 'count',
+                  categoryField: 'date',
+                  data: issues.groupedIssues.closed,
+                  border: {
+                    color: '#CC3458',
+                    opacity: 0.3
+                  },
+                  opacity: 0.3
+                }]"
+              :category-axis-type="'date'"
+              :category-axis-base-unit="'days'"
+              :category-axis-major-ticks-visible="false"
+              :category-axis-major-grid-lines-visible="false"
+              :category-axis-line-visible="false"
+              :category-axis-labels-rotation="'auto'"
+              :category-axis-labels-margin-top="8"
+
+              :value-axis-line-visible="false"
+              :value-axis-labels-step="2"
+              :value-axis-labels-skip="2"
+              :value-axis-labels-margin-right="4"
+              :value-axis-major-grid-lines-step="2"
+              :value-axis-major-grid-lines-skip="2"
+              :value-axis-major-grid-lines-color="'#F0F2F2'">
+            </kendo-chart>
             <!-- <kendo-chart>
                         <kendo-chart-series-defaults type="column" [stack]="true" [gap]="0.06" [overlay]="false"></kendo-chart-series-defaults>
                         <kendo-chart-series>
@@ -157,26 +205,28 @@
         </div>
       </div>
       <div class="col-md-4">
-        <h4 class="card-header">Issue Types</h4>
-        <div class="card-block">
-          <!-- <kendo-chart (seriesHover)="onHover($event)">
-                      <kendo-chart-series>
-                          <kendo-chart-series-item
-                              [holeSize]="100"
-                              [data]="issues"
-                              type="donut"
-                              field="value"
-                              categoryField="type"
-                              [overlay]="false"
-                          ></kendo-chart-series-item>
-                      </kendo-chart-series>
-                      <kendo-chart-legend position="bottom" [labels]="{font: '0.65em Roboto, Arial, sans-serif'}">
-                      </kendo-chart-legend>
-                  </kendo-chart> -->
-          <div class="comp-label chart-label">
-            <!-- <div class="comp-label chart-label" [style.color]="hoverColor"> -->
-            <!-- <strong>{{donutPercent}}</strong>
-                      <small>{{donutLabel}}</small> -->
+        <div class="card issue-types">
+          <h4 class="card-header">Issue Types</h4>
+          <div class="card-block">
+            <!-- <kendo-chart (seriesHover)="onHover($event)">
+                        <kendo-chart-series>
+                            <kendo-chart-series-item
+                                [holeSize]="100"
+                                [data]="issues"
+                                type="donut"
+                                field="value"
+                                categoryField="type"
+                                [overlay]="false"
+                            ></kendo-chart-series-item>
+                        </kendo-chart-series>
+                        <kendo-chart-legend position="bottom" [labels]="{font: '0.65em Roboto, Arial, sans-serif'}">
+                        </kendo-chart-legend>
+                    </kendo-chart> -->
+            <div class="comp-label chart-label">
+              <!-- <div class="comp-label chart-label" [style.color]="hoverColor"> -->
+              <!-- <strong>{{donutPercent}}</strong>
+                        <small>{{donutLabel}}</small> -->
+            </div>
           </div>
         </div>
       </div>
@@ -265,7 +315,7 @@
                 stack:true,
                 field: "count",
                 categoryField: "date",
-                aggregate :"count"
+                aggregate :"count",
             }],
             categoryAxis: [{
                 type:"date",
@@ -289,6 +339,27 @@
                 },
             }
         }
+
+        that.allIssuesSeries = [{
+              name: 'closed',
+              color: 'green',
+              field: 'count',
+              aggregate: 'count',
+              categoryField: 'dateClosed',
+           //   data: issues.groupedIssues.closed
+           data: [{'closed': 1, 'date': new Date()},{'closed': 1, 'date': new Date()}]
+
+            },
+            {
+              name: 'open',
+              color: 'red',
+              field: 'count',
+              aggregate: 'count',
+              categoryField: 'created_at',
+             //field: issues.groupedIssues.open,
+              data: [{'open': 1, 'date': new Date()},{'open': 1, 'date': new Date()}]
+            }
+            ]
 
       that.ghData.read()
     },

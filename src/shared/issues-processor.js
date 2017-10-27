@@ -107,6 +107,15 @@ const colors = {
             close_rate: closeRate
           };
         });
+
+        if(rate && rate.length === 0) {
+          return {
+            lowest: 0,
+            highest: 0,
+            average: 0
+          }
+        }
+
         return {
           lowest: rate.reduce((agg, curr) => agg.close_rate < curr.close_rate ? agg : curr),
           highest: rate.reduce((agg, curr) => agg.close_rate > curr.close_rate ? agg : curr),

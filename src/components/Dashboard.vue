@@ -174,7 +174,12 @@
               holeSize: 60,
               data: issues.issueTypes,
               field: 'value',
-              categoryField: 'type'
+              categoryField: 'type',
+			  labels: {
+				visible: true,
+				position: 'center',
+				template: '#= kendo.format(\'{0:P}\', percentage)#'
+			  }
             }]"
             :legend-position="'bottom'">
 
@@ -190,7 +195,7 @@
         <div class="card">
           <h4 class="card-header">Types Distribution</h4>
           <div class="card-block">
-            <kendo-chart :chart-area-height="360"
+            <kendo-chart :chart-area-height="400"
                 :series-defaults-type="'line'"
                 :series-defaults-line="{style: 'smooth'}"
                 :series="[{

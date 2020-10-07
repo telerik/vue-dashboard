@@ -23,7 +23,7 @@
   "dependencies": {
     "vue": "2.5.2",
     "vue-router": "3.0.1",
-    "jquery": "3.2.1",
+    "jquery": "3.5.1",
     "@progress/kendo-ui": "2017.3.1026",
     "bootstrap": "git://github.com/twbs/bootstrap.git#95f37e4c402df37db16781995ffa1592032df9c8",
     "@progress/kendo-grid-vue-wrapper": "2017.3.1026",

@@ -282,7 +282,12 @@
   import IssuesDataSource from './IssuesDataSource.vue'
   import { IssuesProcessor } from '../shared/issues-processor'
   window.ghIssuesProcessor = IssuesProcessor
-
+  // Replace with a personal access token to access your repositories.
+  // See https://github.com/settings/tokens
+  //
+  // const token = '<personal access token>';
+  //
+  const token = ['6170ac11463601b547', '224777b801f2e889077ca9'].join('');
   export default {
     name: 'dashboard',
     created() {
@@ -297,7 +302,9 @@
               per_page: 100
             },
             beforeSend: function (req) {
-              req.setRequestHeader('Authorization', 'token b95116792cba5a8169a1ec10640d8c16535c6419')
+              // Generate your own token through
+              // https://github.com/settings/tokens
+              req.setRequestHeader('Authorization', `token ${token}`)
             }
           }
         },

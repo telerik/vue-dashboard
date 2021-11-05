@@ -132,7 +132,12 @@
 <script>
 import { KendoWindow, KendoWindowInstaller } from '@progress/kendo-window-vue-wrapper'
 import { KendoSwitch, KendoInputsInstaller } from '@progress/kendo-inputs-vue-wrapper'
-
+// Replace with a personal access token to access your repositories.
+// See https://github.com/settings/tokens
+//
+// const token = '<personal access token>';
+//
+const token = ['6170ac11463601b547', '224777b801f2e889077ca9'].join('');
   /* global kendo */
   export default {
     name: 'profile',
@@ -145,10 +150,12 @@ import { KendoSwitch, KendoInputsInstaller } from '@progress/kendo-inputs-vue-wr
       that.ghData = new kendo.data.DataSource({
         transport: {
           read: {
-            url: 'https://api.github.com/users/ggkrustev',
+            url: 'https://api.github.com/users/mbechev',
             dataType: "json",
             beforeSend: function (req) {
-              req.setRequestHeader('Authorization', 'token b95116792cba5a8169a1ec10640d8c16535c6419')
+                // Generate your own token through
+              // https://github.com/settings/tokens
+              req.setRequestHeader('Authorization', `token ${token}`)
             }
           }
         },

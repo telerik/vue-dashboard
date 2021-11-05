@@ -354,7 +354,7 @@
     },
     computed: {
       issues () {
-          return this.response.length > 0 ? ghIssuesProcessor.process(this.response, this.days) : null
+          return (this.response && this.response.length > 0) ? ghIssuesProcessor.process(this.response, this.days) : null
       },
       days() {
         switch (this.selectedIndex) {
